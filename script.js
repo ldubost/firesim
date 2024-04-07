@@ -201,11 +201,74 @@ function updateFireSpreadWithWind() {
     renderGrid();
 }
 
+let isRaining = false; // Variable to track the rain state
+
+// Function to toggle rain state
+function toggleRain() {
+    isRaining = !isRaining;
+    if (isRaining) {
+        document.getElementById('toggleRain').textContent = 'Stop Rain';
+    } else {
+        document.getElementById('toggleRain').textContent = 'Start Rain';
+    }
+}
+
+// Update the fire spreading logic to account for rain
+function updateFireSpreadWithWindAndRain() {
+    const windDirection = document.getElementById('windDirection').value;
+    // Existing fire spreading logic here
+
+    if (isRaining) {
+        // Extinguish fires in random cells
+        for (let row = 0; row < gridSize; row++) {
+            for (let col = 0; col < gridSize; col++) {
+                if (Math.random() < 0.1) { // 10% chance to extinguish the fire in a cell
+                    if (gridState[row][col] === 2) { // If the cell is burning
+                        gridState[row][col] = 1; // Extinguish the fire, turning it back to a tree
+                    }
+                }
+            }
+        }
+    }
+
+    // Continue with the existing logic to update the grid state and render the grid
+    gridState = newGridState;
+    renderGrid();
+}
+
+document.getElementById('toggleRain').addEventListener('click', toggleRain);
+
 document.addEventListener('DOMContentLoaded', () => {
-    // Ensure the tree density slider is set to 75% on page load
-    document.getElementById('treeDensity').value = "75";
-    document.getElementById('densityValue').innerText = "75%";
-    
-    // Initialize the grid with the default tree density
-    initializeGrid();
+    const mainSpreadProbInput = document.getElementById('mainSpreadProb');
+    const oppositeSpreadProbInput = document.getElementById('oppositeSpreadProb');
+    const mainSpreadProbValue = document.getElementById('mainSpreadProbValue');
+    const oppositeSpreadProbValue = document.getElementById('oppositeSpreadProbValue');
+
+    // Function to update probabilities display
+    function updateProbabilitiesDisplay() {
+        mainSpreadProbValue.innerText = `${mainSpreadProbInput.value}%`;
+        oppositeSpreadProbValue.innerText = `${oppositeSpreadProbInput.value}%`;
+    }
+
+    // Initial display update
+    updateProbabilitiesDisplay();
+
+    // Event listeners for input changes
+    mainSpreadProbInput.addEventListener('input', updateProbabilitiesDisplay);
+    oppositeSpreadProbInput.addEventListener('input', updateProbabilitiesDisplay);
+
+    // Function to calculate and apply new probabilities
+    function applyNewProbabilities() {
+        const mainProb = parseInt(mainSpreadProbInput.value, 10) / 100;
+        const oppositeProb = parseInt(oppositeSpreadProbInput.value, 10) / 100;
+        const orthogonalProb = (mainProb + oppositeProb) / 2;
+        const diagonalProb = orthogonalProb / 2;
+
+        // Apply these probabilities in your fire spreading logic
+        // This is a placeholder. Implement the logic to use these probabilities in your fire spreading function
+    }
+
+    // Call applyNewProbabilities whenever the probabilities are updated
+    mainSpreadProbInput.addEventListener('change', applyNewProbabilities);
+    oppositeSpreadProbInput.addEventListener('change', applyNewProbabilities);
 });
