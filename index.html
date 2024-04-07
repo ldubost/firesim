@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forest Fire Simulation</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="controls">
+        <label for="treeDensity">Tree Density (%): </label>
+        <input type="range" id="treeDensity" name="treeDensity" min="0" max="100" value="50">
+        <span id="densityValue">50%</span>
+        <button id="start">Start Simulation</button>
+        <button id="stop">Stop Simulation</button>
+        <button id="reset">Reset Grid</button>
+    </div>
+    <div id="grid"></div>
+    <script src="script.js"></script>
+</body>
+</html>

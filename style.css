@@ -1,0 +1,49 @@
+body, html {
+    height: 100%;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    padding: 10px 0;
+}
+
+#grid {
+    flex-grow: 1;
+    display: grid;
+    gap: 1px;
+    padding: 10px;
+    box-sizing: border-box;
+    overflow: hidden;
+    justify-content: center;
+}
+
+.cell {
+    width: 16px;
+    height: 16px;
+    box-sizing: border-box;
+    border: 1px solid #999;
+    transition: background-color 0.5s; /* Smooth transition for cell state changes */
+}
+
+.empty {
+    background-color: white;
+}
+
+.tree {
+    background-color: green; /* Trees are green */
+}
+
+.burning {
+    background-color: red; /* Burning trees are red */
+}
+
+.burned {
+    background-color: black; /* Burned trees are black */
+}
