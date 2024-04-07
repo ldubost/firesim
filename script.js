@@ -165,3 +165,34 @@ stopButton.addEventListener('click', stopSimulation);
 resetButton.addEventListener('click', resetGrid);
 
 });
+// Define spreading probabilities for each direction
+const spreadingProbabilities = {
+    north: { main: 0.7, opposite: 0.3 },
+    east: { main: 0.7, opposite: 0.3 },
+    south: { main: 0.7, opposite: 0.3 },
+    west: { main: 0.7, opposite: 0.3 }
+};
+
+// Calculate orthogonal and diagonal probabilities based on main and opposite
+Object.keys(spreadingProbabilities).forEach(direction => {
+    const probs = spreadingProbabilities[direction];
+    probs.orthogonal = (probs.main + probs.opposite) / 2;
+    probs.diagonal = probs.orthogonal / 2;
+});
+
+// Function to update fire spread based on wind direction
+function updateFireSpreadWithWind() {
+    const windDirection = document.getElementById('windDirection').value;
+    const probs = spreadingProbabilities[windDirection];
+
+    // Use probs.main, probs.opposite, probs.orthogonal, and probs.diagonal in your fire spreading logic
+    // Placeholder for the updated fire spreading logic that considers wind direction
+}
+
+// Update event listeners to use the new fire spreading function
+document.getElementById('start').addEventListener('click', () => {
+    // Ensure there's no ongoing simulation
+    if (!simulationInterval) {
+        simulationInterval = setInterval(updateFireSpreadWithWind, 1000); // Update fire spread every second considering wind
+    }
+});
