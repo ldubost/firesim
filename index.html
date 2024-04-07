@@ -7,22 +7,21 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="controls">
-        <label for="windDirection">Wind Direction: </label>
-        <select id="windDirection">
-            <option value="north">North</option>
-            <option value="east">East</option>
-            <option value="south">South</option>
-            <option value="west">West</option>
-        </select>
-        <label for="treeDensity">Tree Density (%): </label>
-        <input type="range" id="treeDensity" name="treeDensity" min="0" max="100" value="50">
-
-        <span id="densityValue">50%</span>
-        <button id="start">Start Simulation</button>
-        <button id="stop">Stop Simulation</button>
-        <button id="reset">Reset Grid</button>
-    </div>
+<div class="controls">
+    <label for="windDirection">Wind Direction: </label>
+    <select id="windDirection">
+        <option value="north">North</option>
+        <option value="east">East</option>
+        <option value="south">South</option>
+        <option value="west">West</option>
+    </select>
+    <label for="treeDensity">Tree Density (%): </label>
+    <input type="range" id="treeDensity" name="treeDensity" min="0" max="100" value="75">
+    <span id="densityValue">75%</span>
+    <button id="start">Start Simulation</button>
+    <button id="stop">Stop Simulation</button>
+    <button id="reset">Reset Grid</button>
+</div>
     <div id="grid"></div>
     <script src="script.js"></script>
 </body>

@@ -182,17 +182,30 @@ Object.keys(spreadingProbabilities).forEach(direction => {
 
 // Function to update fire spread based on wind direction
 function updateFireSpreadWithWind() {
+    // Placeholder for the corrected fire spreading logic
     const windDirection = document.getElementById('windDirection').value;
-    const probs = spreadingProbabilities[windDirection];
+    const newGridState = gridState.map((row, rowIndex) => row.map((cell, colIndex) => {
+        // Logic to determine if the cell should catch fire based on wind direction and probabilities
+        // This is a simplified example. Actual implementation will depend on the specific rules for fire spreading.
+        if (cell === 1) { // If the cell is a tree
+            // Check adjacent cells based on wind direction and decide if this tree catches fire
+            // Placeholder for checking adjacent cells
+            return 2; // Example: Set the cell to burning
+        } else if (cell === 2) { // If the cell is burning
+            return 3; // Example: Set the cell to burned
+        }
+        return cell; // Return the cell state unchanged if it's not affected
+    }));
 
-    // Use probs.main, probs.opposite, probs.orthogonal, and probs.diagonal in your fire spreading logic
-    // Placeholder for the updated fire spreading logic that considers wind direction
+    gridState = newGridState;
+    renderGrid();
 }
 
-// Update event listeners to use the new fire spreading function
-document.getElementById('start').addEventListener('click', () => {
-    // Ensure there's no ongoing simulation
-    if (!simulationInterval) {
-        simulationInterval = setInterval(updateFireSpreadWithWind, 1000); // Update fire spread every second considering wind
-    }
+document.addEventListener('DOMContentLoaded', () => {
+    // Ensure the tree density slider is set to 75% on page load
+    document.getElementById('treeDensity').value = "75";
+    document.getElementById('densityValue').innerText = "75%";
+    
+    // Initialize the grid with the default tree density
+    initializeGrid();
 });
