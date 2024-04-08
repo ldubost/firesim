@@ -51,8 +51,8 @@ function renderGrid() {
                 cell.classList.add('tree'); // Tree cell
             } else if (gridState[row][col] === 2) {
                 cell.classList.add('burning'); // Burning tree cell
-            } else {
-                cell.classList.add('empty'); // Empty cell
+            } else if (gridState[row][col] === 3) {
+                cell.classList.add('burned'); // Burned tree cell
             }
 
             // Add click event listener to set the cell on fire
@@ -107,7 +107,7 @@ function updateFireSpread() {
     let newGridState = gridState.map((row, rowIndex) => row.map((cell, colIndex) => {
         // If the cell is burning, it turns into an empty cell
         if (cell === 2) {
-            return 0;
+            return 3;
         }
 
         // If the cell is a tree, check if any adjacent cell is burning
