@@ -8,14 +8,22 @@
 </head>
 <body>
 <div class="controls">
+  <div class="line">
     <label for="mainSpreadProb">Main Spread Probability (%): </label>
     <input type="range" id="mainSpreadProb" min="0" max="100" value="80">
     <span id="mainSpreadProbValue">80%</span>
-    <br>
+  </div>
+  <div class="line">
     <label for="oppositeSpreadProb">Opposite Spread Probability (%): </label>
     <input type="range" id="oppositeSpreadProb" min="0" max="100" value="20">
     <span id="oppositeSpreadProbValue">20%</span>
-    <br>
+  </div>
+  <div class="line">
+    <label for="treeDensity">Tree Density (%): </label>
+    <input type="range" id="treeDensity" name="treeDensity" min="0" max="100" value="75">
+    <span id="densityValue">75%</span>
+  </div>
+  <div class="line">
     <label for="windDirection">Wind Direction: </label>
     <select id="windDirection">
         <option value="north">North</option>
@@ -23,15 +31,19 @@
         <option value="south">South</option>
         <option value="west">West</option>
     </select>
-    <label for="treeDensity">Tree Density (%): </label>
-    <input type="range" id="treeDensity" name="treeDensity" min="0" max="100" value="75">
-    <span id="densityValue">75%</span>
     <button id="start">Start Simulation</button>
     <button id="stop">Stop Simulation</button>
     <button id="reset">Reset Grid</button>
-    <button id="toggleRain">Toggle Rain</button>
+<button id="toggleRain">Toggle Rain</button>
+<label for="rainLevel">Rain Level: </label>
+<select id="rainLevel">
+    <option value="none">None</option>
+    <option value="medium">Medium</option>
+    <option value="high">High</option>
+</select>
 </div>
-    <div id="grid"></div>
+</div>
+<div id="grid"></div>
     <script src="script.js"></script>
 </body>
 </html>

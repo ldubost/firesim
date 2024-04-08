@@ -182,19 +182,14 @@ Object.keys(spreadingProbabilities).forEach(direction => {
 
 // Function to update fire spread based on wind direction
 function updateFireSpreadWithWind() {
-    // Placeholder for the corrected fire spreading logic
-    const windDirection = document.getElementById('windDirection').value;
-    const newGridState = gridState.map((row, rowIndex) => row.map((cell, colIndex) => {
-        // Logic to determine if the cell should catch fire based on wind direction and probabilities
-        // This is a simplified example. Actual implementation will depend on the specific rules for fire spreading.
-        if (cell === 1) { // If the cell is a tree
-            // Check adjacent cells based on wind direction and decide if this tree catches fire
-            // Placeholder for checking adjacent cells
-            return 2; // Example: Set the cell to burning
-        } else if (cell === 2) { // If the cell is burning
-            return 3; // Example: Set the cell to burned
+    // Existing logic for updating fire spread
+    // Ensure that when a tree is burned, its state is set to a value that corresponds to "burned"
+    // For example, if using numeric states: 1 for tree, 2 for burning, 3 for burned
+    const newGridState = gridState.map(row => row.map(cell => {
+        if (cell === 2) { // If the cell is burning
+            return 3; // Set the cell to burned
         }
-        return cell; // Return the cell state unchanged if it's not affected
+        return cell;
     }));
 
     gridState = newGridState;
@@ -216,6 +211,25 @@ function toggleRain() {
 // Update the fire spreading logic to account for rain
 function updateFireSpreadWithWindAndRain() {
     const windDirection = document.getElementById('windDirection').value;
+    const rainLevel = document.getElementById('rainLevel').value;
+    let reductionFactor = 0;
+    switch (rainLevel) {
+        case 'medium':
+            reductionFactor = 2;
+            break;
+        case 'high':
+            reductionFactor = 4;
+            break;
+    }
+
+    // Adjust fire spreading probabilities based on rain level
+    const mainProb = spreadingProbabilities[windDirection].main / reductionFactor;
+    const oppositeProb = spreadingProbabilities[windDirection].opposite / reductionFactor;
+    const orthogonalProb = (mainProb + oppositeProb) / 2;
+    const diagonalProb = orthogonalProb / 2;
+
+    // Implement the adjusted probabilities in your fire spreading logic
+    // This is a placeholder. The actual implementation will depend on how you've structured your fire spreading logic.
     // Existing fire spreading logic here
 
     if (isRaining) {
@@ -239,36 +253,24 @@ function updateFireSpreadWithWindAndRain() {
 document.getElementById('toggleRain').addEventListener('click', toggleRain);
 
 document.addEventListener('DOMContentLoaded', () => {
-    const mainSpreadProbInput = document.getElementById('mainSpreadProb');
-    const oppositeSpreadProbInput = document.getElementById('oppositeSpreadProb');
-    const mainSpreadProbValue = document.getElementById('mainSpreadProbValue');
-    const oppositeSpreadProbValue = document.getElementById('oppositeSpreadProbValue');
+    const rainLevelSelect = document.getElementById('rainLevel');
 
-    // Function to update probabilities display
-    function updateProbabilitiesDisplay() {
-        mainSpreadProbValue.innerText = `${mainSpreadProbInput.value}%`;
-        oppositeSpreadProbValue.innerText = `${oppositeSpreadProbInput.value}%`;
+    rainLevelSelect.addEventListener('change', () => {
+        applyRainEffect();
+    });
+
+    function applyRainEffect() {
+        const rainLevel = rainLevelSelect.value;
+        let reductionFactor = 0;
+        switch (rainLevel) {
+            case 'medium':
+                reductionFactor = 2;
+                break;
+            case 'high':
+                reductionFactor = 4;
+                break;
+        }
+        // Adjust fire spreading probabilities based on rain level
+        // This is a placeholder. Implement the logic to adjust probabilities based on reductionFactor
     }
-
-    // Initial display update
-    updateProbabilitiesDisplay();
-
-    // Event listeners for input changes
-    mainSpreadProbInput.addEventListener('input', updateProbabilitiesDisplay);
-    oppositeSpreadProbInput.addEventListener('input', updateProbabilitiesDisplay);
-
-    // Function to calculate and apply new probabilities
-    function applyNewProbabilities() {
-        const mainProb = parseInt(mainSpreadProbInput.value, 10) / 100;
-        const oppositeProb = parseInt(oppositeSpreadProbInput.value, 10) / 100;
-        const orthogonalProb = (mainProb + oppositeProb) / 2;
-        const diagonalProb = orthogonalProb / 2;
-
-        // Apply these probabilities in your fire spreading logic
-        // This is a placeholder. Implement the logic to use these probabilities in your fire spreading function
-    }
-
-    // Call applyNewProbabilities whenever the probabilities are updated
-    mainSpreadProbInput.addEventListener('change', applyNewProbabilities);
-    oppositeSpreadProbInput.addEventListener('change', applyNewProbabilities);
 });
