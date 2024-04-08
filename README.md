@@ -33,12 +33,10 @@
     4. **Reset**: Use the "Reset Grid" button to clear the grid and start a   
   new simulation.                                                             
                                                                               
-    ### Adding a Screenshot                                                   
+    ### Screenshot                                                   
                                                                               
-    To give users a preview of what the simulation looks like, a screenshot   
-  named `firesim.png` will be added to the repository. Please place the       
-  screenshot in the root directory of the project.                            
-                                                                              
+    <img src="firesim.png" />
+                                                                          
     ### Conclusion                                                            
                                                                               
     firesim offers an engaging way to understand the dynamics of forest fires 
