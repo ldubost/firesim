@@ -4,46 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Forest Fire Simulation</title>
-    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<div class="controls">
-  <div class="line">
-    <label for="mainSpreadProb">Main Spread Probability (%): </label>
-    <input type="range" id="mainSpreadProb" min="0" max="100" value="80">
-    <span id="mainSpreadProbValue">80%</span>
-  </div>
-  <div class="line">
-    <label for="oppositeSpreadProb">Opposite Spread Probability (%): </label>
-    <input type="range" id="oppositeSpreadProb" min="0" max="100" value="20">
-    <span id="oppositeSpreadProbValue">20%</span>
-  </div>
-  <div class="line">
-    <label for="treeDensity">Tree Density (%): </label>
-    <input type="range" id="treeDensity" name="treeDensity" min="0" max="100" value="65">
-    <span id="densityValue">65%</span>
-  </div>
-  <div class="line">
-    <label for="windDirection">Wind Direction: </label>
-    <select id="windDirection">
-        <option value="north">North</option>
-        <option value="east">East</option>
-        <option value="south">South</option>
-        <option value="west">West</option>
-    </select>
-    <button id="start">Start Simulation</button>
-    <button id="stop">Stop Simulation</button>
-    <button id="reset">Reset Grid</button>
-<button id="toggleRain">Toggle Rain</button>
-<label for="rainLevel">Rain Level: </label>
-<select id="rainLevel">
-    <option value="none">None</option>
-    <option value="medium">Medium</option>
-    <option value="high">High</option>
-</select>
-</div>
-</div>
-<div id="grid"></div>
-    <script src="script.js"></script>
+    <div id="app"></div>
+    <script type="module" src="/src/main.js"></script>
 </body>
 </html>
